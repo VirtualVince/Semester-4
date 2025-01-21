@@ -7,7 +7,7 @@ b = 2
 c = 3
 d = 4
 
-e = (a * c) - (b / d)  # Fully-bracketed version of e = a * c - b / d
+e = (a * c) - (b / d) 
 
 # Fully-bracketed version of e = a - b ** c // d + a % c
 e = ((a - (b ** c)) // d) + (a % c)
