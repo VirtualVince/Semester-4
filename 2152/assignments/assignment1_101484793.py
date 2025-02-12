@@ -11,9 +11,9 @@ membership_active = True  # Boolean
 
 # Dictionary storing friends' workout statistics
 workout_stats = {
-    "Alex": (30, 45, 20),
-    "Jamie": (25, 50, 15),
-    "Taylor": (40, 30, 25)
+    "Vince": (30, 45, 20),
+    "Shalev": (25, 50, 15),
+    "Felipe": (40, 30, 25)
 }
 
 # Calculate total workout minutes for each friend
