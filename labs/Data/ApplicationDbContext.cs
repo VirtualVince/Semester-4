@@ -9,5 +9,6 @@ namespace labs.Data
             : base(options) { }
 
         public DbSet<Project> Projects { get; set; } // DbSet for Project entity
+        public DbSet<ProjectTask> ProjectTasks { get; set; }
     }
 }

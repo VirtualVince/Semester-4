@@ -1,0 +1,40 @@
+@model labs.Models.Project
+
+@{
+    ViewData["Title"] = "Project Tasks";
+}
+
+<h2>Tasks for @Model.Name</h2>
+
+<a asp-action="Create" asp-route-projectId="@Model.ProjectId" class="btn btn-success mb-3">Add Task</a>
+
+@if (Model.Tasks != null && Model.Tasks.Any())
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var task in Model.Tasks)
+        {
+            <tr>
+                <td>@task.Title</td>
+                <td>@task.Description</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@task.ProjectTaskId" class="btn btn-info btn-sm">View</a>
+                    <a asp-action="Edit" asp-route-id="@task.ProjectTaskId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@task.ProjectTaskId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No tasks available for this project.</p>
+}

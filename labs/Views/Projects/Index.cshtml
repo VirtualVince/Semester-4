@@ -1,5 +1,5 @@
-@* indicates view expects a list of project objects as its model *@
-@model List<Project>
+@model List<labs.Models.Project>
+
 @{
     ViewBag.Title = "List of Projects";
     Layout = "_Layout";
@@ -7,33 +7,49 @@
 
 <h2>Project Listing</h2>
 
+<a asp-action="Create" class="btn btn-success mb-3">Create New Project</a>
+
 @if (Model.Any())
-{ 
-    //iteration
+{
     <table class="table">
         <thead>
-             <tr>
-                 <th>ID</th>
-                 <th>Name</th>
-                 <th>Description</th>
-                 <!-- other project fields -->
-            </tr>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Tasks</th> <!-- New Column -->
+            <th>Actions</th>
+        </tr>
         </thead>
-        
         <tbody>
         @foreach (var p in Model)
-    {
-        <tr>
-            <th>@p.ProjectId</th>
-            <th>@p.Name</th>
-            <th>@p.Description</th>
-        </tr>
-    }
-    </tbody>
+        {
+            <tr>
+                <td>@p.ProjectId</td>
+                <td>@p.Name</td>
+                <td>@p.Description</td>
+                <td>
+                    @if (p.Tasks != null)
+                    {
+                        @p.Tasks.Count
+                    }
+                    else
+                    {
+                        <text>0</text>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@p.ProjectId" class="btn btn-info btn-sm">View</a>
+                    <a asp-action="Index" asp-controller="ProjectTask" asp-route-projectId="@p.ProjectId" class="btn btn-warning btn-sm">Tasks</a>
+                    <a asp-action="Edit" asp-route-id="@p.ProjectId" class="btn btn-primary btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@p.ProjectId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
     </table>
 }
-
 else
 {
-    <p> No projects available</p>
+    <p>No projects available.</p>
 }
