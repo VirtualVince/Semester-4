@@ -37,6 +37,28 @@ public class ProjectsController : Controller
         }
         return View(project);
     }
+    
+    // Show the Create form
+    [HttpGet("create")]
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+// Handle form submission
+    [HttpPost("create")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(Project project)
+    {
+        if (ModelState.IsValid)
+        {
+            _context.Projects.Add(project);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        return View(project);
+    }
+
 
     // Edit a project
     [HttpGet("edit/{id:int}")]
