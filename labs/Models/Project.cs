@@ -23,5 +23,8 @@ public class Project
     
     public string Status { get; set; }
     
+    public List<ProjectTask> Tasks { get; set; } = new();
+
+    
     
 }

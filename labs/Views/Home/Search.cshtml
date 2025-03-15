@@ -1,0 +1,38 @@
+@model labs.Models.SearchViewModel
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<h2>Search Results</h2>
+
+@if (Model.Projects.Any())
+{
+    <h3>Projects</h3>
+    <ul>
+        @foreach (var p in Model.Projects)
+        {
+            <li>
+                <a asp-controller="Projects" asp-action="Details" asp-route-id="@p.ProjectId">@p.Name</a> - @p.Description
+            </li>
+        }
+    </ul>
+}
+
+@if (Model.Tasks.Any())
+{
+    <h3>Tasks</h3>
+    <ul>
+        @foreach (var t in Model.Tasks)
+        {
+            <li>
+                <a asp-controller="ProjectTask" asp-action="Details" asp-route-id="@t.ProjectTaskId">@t.Title</a> - @t.Description
+            </li>
+        }
+    </ul>
+}
+
+@if (!Model.Projects.Any() && !Model.Tasks.Any())
+{
+    <p>No results found.</p>
+}
