@@ -26,9 +26,9 @@
                 <td>@task.Title</td>
                 <td>@task.Description</td>
                 <td>
-                    <a asp-area="ProjectManagement" asp-action="Details" asp-route-id="@task.ProjectTaskId" class="btn btn-info btn-sm">View</a>
-                    <a asp-area="ProjectManagement" asp-action="Edit" asp-route-id="@task.ProjectTaskId" class="btn btn-warning btn-sm">Edit</a>
-                    <a asp-area="ProjectManagement" asp-action="Delete" asp-route-id="@task.ProjectTaskId" class="btn btn-danger btn-sm">Delete</a>
+                    <a asp-area="ProjectManagement" asp-controller="ProjectTask" asp-action="Details" asp-route-projectId="@Model.ProjectId" asp-route-id="@task.ProjectTaskId" class="btn btn-info btn-sm">View</a>
+                    <a asp-area="ProjectManagement" asp-controller="ProjectTask" asp-action="Edit" asp-route-projectId="@Model.ProjectId" asp-route-id="@task.ProjectTaskId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-area="ProjectManagement" asp-controller="ProjectTask" asp-action="Delete" asp-route-projectId="@Model.ProjectId" asp-route-id="@task.ProjectTaskId" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
         }

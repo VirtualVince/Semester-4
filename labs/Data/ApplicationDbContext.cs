@@ -1,6 +1,7 @@
-using labs.Areas.ProjectManagement.Models;
 using Microsoft.EntityFrameworkCore;
-using labs.Models; // Ensure correct namespace for Project model
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using labs.Areas.ProjectManagement.Models;
+using labs.Models;
 
 namespace labs.Data
 {
@@ -9,18 +10,23 @@ namespace labs.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
             : base(options) { }
 
-        public DbSet<Project> Projects { get; set; } // DbSet for Project entity
+        public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectTask> ProjectTasks { get; set; }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Project>()
                 .Property(p => p.StartDate)
-                .HasColumnType("timestamp without time zone");
+                .HasColumnType("timestamptz");  // Use "timestamptz" for PostgreSQL (with timezone)
 
             modelBuilder.Entity<Project>()
                 .Property(p => p.EndDate)
-                .HasColumnType("timestamp without time zone");
+                .HasColumnType("timestamptz");  
+
+            modelBuilder.Entity<Project>()
+                .Property(p => p.CreatedAt)
+                .HasColumnType("timestamptz");  
+        }
+
         }
     }
-}

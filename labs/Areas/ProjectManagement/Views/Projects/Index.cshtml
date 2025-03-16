@@ -1,4 +1,5 @@
 @model List<labs.Areas.ProjectManagement.Models.Project>
+@await Component.InvokeAsync("ProjectSummary")
 
 @{
     ViewBag.Title = "List of Projects";

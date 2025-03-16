@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace labs.Areas.ProjectManagement.Controllers;
 
+[Area("ProjectManagement")]
 [Route("ProjectManagement/projects/{projectId:int}/tasks")]
 public class ProjectTaskController : Controller
 {

@@ -1,8 +1,9 @@
 using labs.Areas.ProjectManagement.Models;
 using labs.Data;
-using labs.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 
 namespace labs.Areas.ProjectManagement.Controllers;
 
@@ -30,7 +31,7 @@ public class ProjectsController : Controller
     public async Task<IActionResult> Details(int id)
     {
         var project = await _context.Projects
-            .Include(p => p.Tasks) // Include related tasks
+            .Include(p => p.Tasks) 
             .FirstOrDefaultAsync(p => p.ProjectId == id);
 
         if (project == null)
@@ -39,14 +40,14 @@ public class ProjectsController : Controller
         }
         return View(project);
     }
-    
+
     // Show the Create form
     [HttpGet("create")]
     public IActionResult Create()
     {
         return View();
     }
-    
+
     // Create a project
     [HttpPost("create")]
     [ValidateAntiForgeryToken]
@@ -54,8 +55,9 @@ public class ProjectsController : Controller
     {
         if (ModelState.IsValid)
         {
-            project.StartDate = project.StartDate.ToUniversalTime(); // Convert to UTC
-            project.EndDate = project.EndDate.ToUniversalTime();     // Convert to UTC
+            project.StartDate = project.StartDate.ToUniversalTime(); 
+            project.EndDate = project.EndDate.ToUniversalTime();     
+            project.CreatedAt = DateTimeOffset.UtcNow; 
 
             _context.Projects.Add(project);
             await _context.SaveChangesAsync();
@@ -63,7 +65,6 @@ public class ProjectsController : Controller
         }
         return View(project);
     }
-
 
     // Edit a project
     [HttpGet("edit/{id:int}")]
@@ -88,10 +89,20 @@ public class ProjectsController : Controller
 
         if (ModelState.IsValid)
         {
-            project.StartDate = project.StartDate.ToUniversalTime(); // Convert to UTC
-            project.EndDate = project.EndDate.ToUniversalTime();     // Convert to UTC
+            var existingProject = await _context.Projects.FindAsync(id);
+            if (existingProject == null)
+            {
+                return NotFound();
+            }
 
-            _context.Update(project);
+            // ✅ Preserve DateTimeOffset format
+            existingProject.Name = project.Name;
+            existingProject.Description = project.Description;
+            existingProject.StartDate = project.StartDate.ToUniversalTime(); 
+            existingProject.EndDate = project.EndDate.ToUniversalTime();
+            existingProject.Status = project.Status;
+
+            _context.Update(existingProject);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
