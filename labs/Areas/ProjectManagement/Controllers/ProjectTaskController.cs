@@ -1,11 +1,12 @@
+using labs.Areas.ProjectManagement.Models;
 using labs.Data;
 using labs.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace labs.Controllers;
+namespace labs.Areas.ProjectManagement.Controllers;
 
-[Route("projects/{projectId:int}/tasks")]
+[Route("ProjectManagement/projects/{projectId:int}/tasks")]
 public class ProjectTaskController : Controller
 {
     private readonly ApplicationDbContext _context;

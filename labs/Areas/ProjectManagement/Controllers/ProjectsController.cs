@@ -1,11 +1,13 @@
+using labs.Areas.ProjectManagement.Models;
 using labs.Data;
 using labs.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace labs.Controllers;
+namespace labs.Areas.ProjectManagement.Controllers;
 
-[Route("projects")]
+[Area("ProjectManagement")]
+[Route("ProjectManagement/[controller]")]
 public class ProjectsController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -44,14 +46,17 @@ public class ProjectsController : Controller
     {
         return View();
     }
-
-// Handle form submission
+    
+    // Create a project
     [HttpPost("create")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Project project)
     {
         if (ModelState.IsValid)
         {
+            project.StartDate = project.StartDate.ToUniversalTime(); // Convert to UTC
+            project.EndDate = project.EndDate.ToUniversalTime();     // Convert to UTC
+
             _context.Projects.Add(project);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -83,6 +88,9 @@ public class ProjectsController : Controller
 
         if (ModelState.IsValid)
         {
+            project.StartDate = project.StartDate.ToUniversalTime(); // Convert to UTC
+            project.EndDate = project.EndDate.ToUniversalTime();     // Convert to UTC
+
             _context.Update(project);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");

@@ -1,3 +1,5 @@
+using labs.Areas.ProjectManagement.Models;
+
 namespace labs.Models
 {
     public class SearchViewModel

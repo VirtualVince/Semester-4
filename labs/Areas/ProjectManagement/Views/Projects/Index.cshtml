@@ -1,4 +1,4 @@
-@model List<labs.Models.Project>
+@model List<labs.Areas.ProjectManagement.Models.Project>
 
 @{
     ViewBag.Title = "List of Projects";
@@ -7,7 +7,10 @@
 
 <h2>Project Listing</h2>
 
-<a asp-action="Create" class="btn btn-success mb-3">Create New Project</a>
+<a asp-area="ProjectManagement" asp-controller="Projects" asp-action="Create" class="btn btn-success">
+    Create New Project
+</a>
+
 
 @if (Model.Any())
 {
@@ -39,10 +42,10 @@
                     }
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@p.ProjectId" class="btn btn-info btn-sm">View</a>
-                    <a asp-action="Index" asp-controller="ProjectTask" asp-route-projectId="@p.ProjectId" class="btn btn-warning btn-sm">Tasks</a>
-                    <a asp-action="Edit" asp-route-id="@p.ProjectId" class="btn btn-primary btn-sm">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@p.ProjectId" class="btn btn-danger btn-sm">Delete</a>
+                    <a asp-area="ProjectManagement" asp-action="Details" asp-route-id="@p.ProjectId" class="btn btn-info btn-sm">View</a>
+                    <a asp-area="ProjectManagement" asp-action="Index" asp-controller="ProjectTask" asp-route-projectId="@p.ProjectId" class="btn btn-warning btn-sm">Tasks</a>
+                    <a asp-area="ProjectManagement" asp-action="Edit" asp-route-id="@p.ProjectId" class="btn btn-primary btn-sm">Edit</a>
+                    <a asp-area="ProjectManagement" asp-action="Delete" asp-route-id="@p.ProjectId" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
         }

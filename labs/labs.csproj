@@ -7,9 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Areas\ProjectManagement\Controllers\" />
-      <Folder Include="Areas\ProjectManagement\Views\ProjectTask\" />
-      <Folder Include="Areas\ProjectManagement\Views\Project\" />
       <Folder Include="Migrations\" />
     </ItemGroup>
 
@@ -21,6 +18,12 @@
       </PackageReference>
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.3" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Areas\ProjectManagement\Views\Projects\Create.cshtml" />
+      <AdditionalFiles Include="Areas\ProjectManagement\Views\Projects\Details.cshtml" />
+      <AdditionalFiles Include="Areas\ProjectManagement\Views\Projects\Index.cshtml" />
     </ItemGroup>
 
 </Project>

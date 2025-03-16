@@ -1,3 +1,4 @@
+using labs.Areas.ProjectManagement.Models;
 using Microsoft.EntityFrameworkCore;
 using labs.Models; // Ensure correct namespace for Project model
 

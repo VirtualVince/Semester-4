@@ -1,20 +1,29 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-            <i class="fas fa-tasks"></i> GBC Project Management
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">labs</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="ProjectTasks" asp-action="Index">Tasks</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="ProjectManagement" asp-controller="Projects" asp-action="Index">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="ProjectManagement" asp-controller="ProjectTask" asp-action="Index">Project Tasks</a>
                 </li>
             </ul>
         </div>
     </div>
+    <form asp-controller="Home" asp-action="Search" method="get" class="d-flex">
+        <input type="text" name="searchTerm" class="form-control me-2" placeholder="Search projects or tasks">
+        <button type="submit" class="btn btn-outline-light">Search</button>
+    </form>
 </nav>
