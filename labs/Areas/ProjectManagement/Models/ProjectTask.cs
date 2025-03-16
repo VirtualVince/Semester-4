@@ -18,5 +18,8 @@ namespace labs.Areas.ProjectManagement.Models
 
         [ForeignKey("ProjectId")]
         public Project Project { get; set; } // Navigation Property
+        
+        [NotMapped]
+        public Project? ProjectNavigation { get; set; }
     }
 }

@@ -22,7 +22,7 @@ public class ProjectTaskController : Controller
     public async Task<IActionResult> Index(int projectId)
     {
         var project = await _context.Projects
-            .Include(p => p.Tasks)
+            .Include(p => p.Tasks) 
             .FirstOrDefaultAsync(p => p.ProjectId == projectId);
 
         if (project == null)
@@ -30,7 +30,7 @@ public class ProjectTaskController : Controller
             return NotFound();
         }
 
-        return View(project);
+        return View(project); 
     }
 
     // Task details
@@ -58,13 +58,26 @@ public class ProjectTaskController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(ProjectTask task)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid) 
         {
-            _context.ProjectTasks.Add(task);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index", new { projectId = task.ProjectId });
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
+            return View(task);
         }
-        return View(task);
+
+       
+        var projectExists = await _context.Projects.AnyAsync(p => p.ProjectId == task.ProjectId);
+        if (!projectExists)
+        {
+            ModelState.AddModelError("", "Invalid Project ID");
+            return View(task);
+        }
+
+        _context.ProjectTasks.Add(task);
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Index", new { projectId = task.ProjectId });
     }
 
     // Edit a task
