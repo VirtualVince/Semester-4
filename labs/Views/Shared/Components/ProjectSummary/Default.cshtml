@@ -1,4 +1,22 @@
-@model int
-<div class="alert alert-info">
-    Total Projects: @Model
+@model labs.Areas.ProjectManagement.Models.Project
+
+<div class="project-summary">
+
+    <p>@Html.DisplayFor(model => model.Name, templateName: "ProjectName")</p>
+    <p>@Html.DisplayFor(model => model.Description, templateName: "ProjectDescription")</p>
+    <p><b>Start Date: </b>@Html.DisplayFor(model => model.StartDate, templateName: "DateTime")</p>
+    <p><b>End Date: </b>@Html.DisplayFor(model => model.EndDate, templateName: "DateTime")</p>
+    <p><b>Status: </b>@Html.DisplayFor(model => model.Status, templateName: "ProjectName")</p>
+
+    <p><b>Tasks</b></p>
+    <ul>
+        @foreach (var task in Model.Tasks)
+        {
+            <li>
+                <p>@Html.DisplayFor(model => task.Title, templateName: "ProjectTaskTitle")</p>
+                <p>@Html.DisplayFor(model => task.Description, templateName: "ProjectDescription")</p>
+            </li>
+        }
+    </ul>
+
 </div>
